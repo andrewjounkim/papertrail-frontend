@@ -2,7 +2,7 @@
 // PaperTrail frontend. Everything the backend needs is behind API_BASE —
 // switch this one constant between local dev and the deployed Render URL.
 // ---------------------------------------------------------------------
-const API_BASE = "http://127.0.0.1:5001";
+const API_BASE = "https://papertrail-backend-un64.onrender.com";
 
 const LEVELS = ["high_school", "undergrad", "expert"];
 
