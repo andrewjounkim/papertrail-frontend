@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PaperTrail — a research paper reading companion</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>📄 PaperTrail</h1>
+    <p class="tagline">Look up a research paper and see it explained, traced forward through citations, and tracked as a field trend — all grounded in live PubMed &amp; iCite data.</p>
+  </header>
+
+  <div id="server-banner" class="banner hidden"></div>
+
+  <main>
+    <!-- Input -->
+    <section id="input-section" class="card">
+      <label for="paper-input">PubMed ID, PubMed URL, or DOI</label>
+      <form id="paper-form">
+        <input type="text" id="paper-input" placeholder="e.g. 23193287, https://pubmed.ncbi.nlm.nih.gov/23193287/, or 10.1038/nature12373" autocomplete="off" />
+        <button type="submit" id="paper-submit">Look up</button>
+      </form>
+      <div class="chips">
+        <span class="chip-label">Try:</span>
+        <button class="chip" data-value="23193287">23193287 (GenBank — highly cited)</button>
+        <button class="chip" data-value="10.1038/nature12373">10.1038/nature12373 (DOI)</button>
+        <button class="chip" data-value="42453397">42453397 (very recent paper)</button>
+      </div>
+      <div id="paper-error" class="error hidden"></div>
+    </section>
+
+    <!-- Paper card -->
+    <section id="paper-section" class="card hidden">
+      <div id="paper-loading" class="loading hidden">Loading paper…</div>
+      <div id="paper-content" class="hidden">
+        <h2 id="paper-title"></h2>
+        <p id="paper-meta" class="meta"></p>
+        <p id="paper-stats" class="stats"></p>
+        <p id="paper-abstract" class="abstract"></p>
+        <a id="paper-link" href="#" target="_blank" rel="noopener">View on PubMed ↗</a>
+      </div>
+    </section>
+
+    <!-- Explain slider -->
+    <section id="explain-section" class="card hidden">
+      <h3>Plain-language explanation</h3>
+      <div class="slider-row">
+        <input type="range" id="level-slider" min="0" max="2" step="1" value="1" />
+        <div class="slider-labels">
+          <span>High school</span>
+          <span>Undergrad</span>
+          <span>Expert</span>
+        </div>
+      </div>
+      <div id="explain-loading" class="loading hidden">Generating explanation…</div>
+      <div id="explain-error" class="error hidden"></div>
+      <p id="explain-text"></p>
+    </section>
+
+    <!-- What happened next -->
+    <section id="whatnext-section" class="card hidden">
+      <h3>What happened next</h3>
+      <div id="whatnext-loading" class="loading hidden">Looking up citing papers…</div>
+      <div id="whatnext-error" class="error hidden"></div>
+      <div id="whatnext-content" class="hidden">
+        <p id="whatnext-count" class="meta"></p>
+        <p id="whatnext-summary" class="ai-summary"></p>
+        <ul id="whatnext-list"></ul>
+      </div>
+    </section>
+
+    <!-- Trend chart -->
+    <section id="trend-section" class="card hidden">
+      <h3>Field trend</h3>
+      <div id="trend-loading" class="loading hidden">Building trend chart…</div>
+      <div id="trend-error" class="error hidden"></div>
+      <div id="trend-content" class="hidden">
+        <form id="trend-form">
+          <label for="trend-query">PubMed search query used</label>
+          <div class="trend-query-row">
+            <input type="text" id="trend-query" />
+            <button type="submit">Re-run</button>
+          </div>
+        </form>
+        <canvas id="trend-chart" height="90"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built for a class assignment. Data from <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubMed</a> &amp; <a href="https://icite.od.nih.gov/" target="_blank" rel="noopener">iCite</a>.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
